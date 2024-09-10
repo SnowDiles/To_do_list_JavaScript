@@ -57,8 +57,6 @@
 }
 
 .leftpanel button:hover{
-
-
   background-color: rgb(231, 239, 255);
   transition: all 0.3s linear;
   cursor: pointer;
@@ -102,7 +100,7 @@
   height: auto;
   margin: 0 auto;
   margin-top: 80px;
-  background-color: cadetblue;
+ 
 }
 
 .modalTaskContainClass{
@@ -207,4 +205,107 @@ select{
 .modalClose{
 
   width: fit-content;
+}
+
+
+.folderContain{
+
+  padding-left: 10px;
+
+}
+
+.folderContain div{
+
+
+  padding-top: 5px;
+  margin-top: 5px;
+}
+
+.folderContain div:hover{
+
+  background-color: rgb(231, 239, 255);
+  transition: all 0.3s linear;
+  cursor: pointer;
+  color: #00e713;
+  border-right: 3px solid #00e713;
+
+}
+
+.folderContain p{
+
+
+  display: inline;
+  padding-left: 7px;
+  margin-bottom: 5px;
+  position: relative;
+  bottom: 4px;
+  font-weight: 800px;
+}
+
+
+.taskContain hr{
+
+  
+  margin-top: 15px;
+
+}
+
+.taskContain{
+    margin-top: 50px;
+  
+  padding-bottom: 20px;
+}
+
+.taskContain img{
+
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+
+.taskContain img:hover{
+
+  cursor: pointer;
+}
+
+:checked{
+
+
+  text-decoration: overline;
+}
+
+.flexTaskUp{
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.imgContain{
+
+
+  display: flex;
+  justify-content: end;
+  padding-top: 5px;
+}
+
+.imgContain p{
+
+  padding-left: 5px;
+  color: blue;
+  
+}
+
+.imgContain p:hover{
+
+  cursor: pointer;
+}
+
+.centralDiv p{
+
+  position: relative;
+  bottom: 3px;
+  padding-left: 5px;
 }
