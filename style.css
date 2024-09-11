@@ -309,3 +309,45 @@ select{
   bottom: 3px;
   padding-left: 5px;
 }
+
+
+:checked{
+
+  color: red;
+}
+
+.addTask{
+
+  color: grey;
+  background-color: white;
+  padding: 5px;
+  border: none;
+}
+
+.addTask strong{
+
+
+  padding-left: 5px;
+  position: relative;
+  bottom: 3px;
+}
+.addTask img{
+
+
+  height: 15px;
+  width: 15px;
+}
+
+.addTask:hover{
+
+  cursor: pointer;
+  color: #008be7;
+}
+
+
+.deleteButton:hover{
+
+
+  cursor: pointer;
+}
+

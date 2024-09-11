@@ -70,6 +70,7 @@ function createFolder(formData, array) {
   array.push(myFolder);
   addFolderSelect(myFolder);
   displayListFolder(myFolder);
+  displayAllFolder();
 }
 
 // @ts-ignore
@@ -85,91 +86,183 @@ document
 function addFolderSelect(array) {
   let folder = document.getElementById("folderSelect");
   // @ts-ignore
-  folder.insertAdjacentHTML("beforeend", `<option value="${array.name}">${array.name}</option>`);
+  folder.insertAdjacentHTML(
+    "beforeend",
+    `<option value="${array.name}">${array.name}</option>`
+  );
 }
 
-
-function displayListFolder(array){
+function displayListFolder(array) {
   let folderId = document.getElementById("foldercontain");
 
-  // @ts-ignore
-  folderId.insertAdjacentHTML("beforeend",`<div id="${array.name}"><img src="../Projet_to-do-list/images/icon_dossier.png" alt="image_dossier" srcset=""><p>${array.name}</p></div>`);
+  let nom = array.name; 
 
+  // @ts-ignore
+  folderId.insertAdjacentHTML(
+    "beforeend",
+    `<div onclick="displayFolderContent('${nom}')" id="${array.name}">
+      <img src="../Projet_to-do-list/images/icon_dossier.png" alt="image_dossier" srcset="">
+      <p>${array.name}</p>
+    </div>`
+  );
 }
 
-
-
-function displayAllTask(array){
-
-  let idContent = document.getElementById("taskContain");
-  console.log("mec c'est grave drole");
+function displayAllTask(array) {
+  let idContent = document.getElementById("content");
 
   // @ts-ignore
 
-  idContent.innerHTML ='';
-  idContent?.insertAdjacentHTML("beforeend", `
+  idContent.innerHTML = "";
+  idContent?.insertAdjacentHTML(
+    "beforeend",
+    `
+    <h1 style="padding-bottom:50px;">All Task</h1>
+    
+    
     <div class="flexTaskUp">
+
       <div>
-        <form action="#">
+         <form action="#">
           
           <p style="display: inline; padding-left: 5px">Ceci est une tache par defaut</p>
-        </form>
-      </div>
+  </form>
+       </div>
 
-      <div style="padding-left: 20px;" class="centralDiv">
-        <img src="images/date_blue.png" alt="date" style="display: inline;"> <p style="display: inline;">L'emplacement de la date</p>
-      </div>
+       <div style="padding-left: 20px;" class="centralDiv">
+         <img src="images/date_blue.png" alt="date" style="display: inline;width:20px;height:20px;margin-left:10px;"> <p style="display: inline;">L'emplacement de la date</p>
+       </div>
 
       <div>
-        <img src="images/x_icon.png" alt="" />
-      </div>
-    </div>
+        
+     </div>
+     </div>
 
-    <div class="imgContain">
-      <img src="images/flag_blue.png" alt="" /><p>priorite 1</p>
-      <img src="images/folder_blue.png" alt="" /><p>default</p>
+     <div class="imgContain">
+       <img src="images/flag_blue.png" alt="" style="width:20px;height:20px;"/><p style="padding-right:10px;">priorite 1</p>
+       <img src="images/folder_blue.png" alt="" style="width:20px;height:20px;"/><p>default</p>
 
-    </div>
-  <hr />`) ;
+     </div>
+   <hr style="margin-top:15px;"/>`
+  );
   for (let index = 0; index < array.length; index++) {
-    console.log("me voici dans la boucle");
-
     // @ts-ignore
-    idContent?.insertAdjacentHTML("beforeend", `
+    idContent?.insertAdjacentHTML(
+      "beforeend",
+      `
           <div class="flexTaskUp">
-            <div>
-              <form action="#">
-                <input type="checkbox" name="${array[index].name}" id="${array[index].name}" value="test" />
-                <p style="display: inline; padding-left: 5px">${array[index].name}</p>
-              </form>
-            </div>
 
-            <div style="padding-left: 20px;" class="centralDiv">
-              <img src="images/date_blue.png" alt="date" style="display: inline;"> <p style="display: inline;">${array[index].date}</p>
-            </div>
+      <div>
+         <form action="#">
+          
+          <p style="display: inline; padding-left: 5px">${array[index].name}</p>
+  </form>
+       </div>
 
-            <div>
-              <img src="images/x_icon.png" alt="" onclick="deleteTask('${array[index].name}')"/>
-            </div>
-          </div>
+       <div style="padding-left: 20px;" class="centralDiv">
+         <img src="images/date_blue.png" alt="date" style="display: inline;width:20px;height:20px;margin-left:10px;"> <p style="display: inline;">${array[index].date}</p>
+       </div>
 
-          <div class="imgContain">
-            <img src="images/flag_blue.png" alt="" /><p>${array[index].priorite}</p>
-            <img src="images/folder_blue.png" alt="" /><p>${array[index].folder}</p>
+      <div>
+        
+     </div>
+     <img class="deleteButton"    src="images/x_icon.png" alt="" style="margin-bottom: 15px;height:20px;width:20px;" onclick="deleteTask(${index})" >
+     </div>
 
-          </div>
-        <hr />`) ;
-        console.log(idContent);
-    console.log(array[index].priorite);
+     <div class="imgContain">
+       <img src="images/flag_blue.png" alt="" style="width:20px;height:20px;"/><p style="padding-right:10px;">${array[index].priorite}</p>
+       <img src="images/folder_blue.png" alt="" style="width:20px;height:20px;"/><p>${array[index].folder}</p>
+
+     </div>
+   <hr style="margin-top:15px;"/>`
+    );
   }
-
-  console.log("je suis apres la boucle");
 }
 
+function deleteTask(idOfTask) {
+  taskLi.splice(idOfTask, 1);
+  displayAllTask(taskLi);
+  console.log("Tableau après suppression:", taskLi);
+}
 
-function deleteTask(){
+function displayAllFolder() {
+  let folderId = document.getElementById("content");
 
-    console.log("tesssst");
+  // @ts-ignore
+  folderId.innerHTML = "";
+
+  // @ts-ignore
+  folderId.insertAdjacentHTML(
+    "beforeend",
+    `<h1 style="padding-bottom: 50px;">All Folder</h1>
+    <div class="folderClass">
+    <div style="padding-top: 20px;">
+      <img src="images/icon_folder_green.png" alt="" style="width: 30px;height: 30px;">
+      <p style="display: inline;position: relative;bottom: 8px;">default</p>
+    </div>
+  </div>`
+  );
+  for (let index = 0; index < folderArray.length; index++) {
+    // @ts-ignore
+    folderId?.insertAdjacentHTML(
+      "beforeend",
+      `
+          <div class="folderClass">
+          <div style="padding-top: 20px;">
+            <img src="images/icon_folder_green.png" alt="" style="width: 30px;height: 30px;">
+            <p style="display: inline;position: relative;bottom: 8px;">${folderArray[index].name}</p>
+          </div>
+        </div>`
+    );
+    console.log(folderArray[index].name);
+  }
+}
+
+function displayFolderContent(nameFolder) {
 
 
+  let folderId = document.getElementById("content");
+  // @ts-ignore
+  folderId.innerHTML = ``;
+
+  
+  // @ts-ignore
+  folderId.insertAdjacentHTML(
+    "beforeend",
+    `<h1 style="padding-bottom: 50px;">${nameFolder}</h1>`
+  );
+  for (let index = 0; index < taskLi.length; index++) {
+    if (nameFolder === taskLi[index].folder) {
+      // @ts-ignore
+      folderId.insertAdjacentHTML(
+        "beforeend",
+        `
+    <div class="flexTaskUp">
+
+      <div>
+         <form action="#">
+          
+          <p style="display: inline; padding-left: 5px">${taskLi[index].name}</p>
+    </form>
+       </div>
+
+       <div style="padding-left: 20px;" class="centralDiv">
+         <img src="images/date_blue.png" alt="date" style="display: inline;width:20px;height:20px;margin-left:10px;"> <p style="display: inline;">${taskLi[index].date}</p>
+       </div>
+
+      <div>
+        
+     </div>
+     <img class="deleteButton"    src="images/x_icon.png" alt="" style="margin-bottom: 15px;height:20px;width:20px;" onclick="deleteTask(${index})" >
+     </div>
+
+     <div class="imgContain">
+       <img src="images/flag_blue.png" alt="" style="width:20px;height:20px;"/><p style="padding-right:10px;">${taskLi[index].priorite}</p>
+       <img src="images/folder_blue.png" alt="" style="width:20px;height:20px;"/><p>${taskLi[index].folder}</p>
+
+     </div>
+   <hr style="margin-top:15px;"/>`
+      );
+      console.log("je suis bien entré dans le if");
+    }
+  }
 }
